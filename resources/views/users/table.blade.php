@@ -5,9 +5,6 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Email Verified At</th>
-                <th>Password</th>
-                <th>Remember Token</th>
                 <th colspan="3">Action</th>
             </tr>
             </thead>
@@ -16,9 +13,6 @@
                 <tr>
                     <td>{{ $users->name }}</td>
                     <td>{{ $users->email }}</td>
-                    <td>{{ $users->email_verified_at }}</td>
-                    <td>{{ $users->password }}</td>
-                    <td>{{ $users->remember_token }}</td>
                     <td  style="width: 120px">
                         {!! Form::open(['route' => ['users.destroy', $users->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
@@ -40,9 +34,4 @@
         </table>
     </div>
 
-    <div class="card-footer clearfix">
-        <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $users])
-        </div>
-    </div>
 </div>

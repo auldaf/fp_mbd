@@ -3,7 +3,6 @@
         <table class="table" id="products-table">
             <thead>
             <tr>
-                <th>Supplier Ids</th>
                 <th>Product Code</th>
                 <th>Product Name</th>
                 <th>Description</th>
@@ -16,7 +15,6 @@
             <tbody>
             @foreach($products as $products)
                 <tr>
-                    <td>{{ $products->supplier_ids }}</td>
                     <td>{{ $products->product_code }}</td>
                     <td>{{ $products->product_name }}</td>
                     <td>{{ $products->description }}</td>

@@ -26,6 +26,12 @@
         <div class="card">
             @include('invoices.table')
         </div>
+
+         <div class="card-footer clearfix">
+            <div class="float-right">
+                @include('adminlte-templates::common.paginate', ['records' => $invoices])
+            </div>
+        </div>
     </div>
 
 @endsection

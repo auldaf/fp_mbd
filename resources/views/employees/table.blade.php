@@ -1,30 +1,32 @@
 <div class="card-body p-0">
     <div class="table-responsive">
-        <table class="table" id="shippers-table">
+        <table class="table" id="employees-table">
             <thead>
             <tr>
                 <th>Company</th>
                 <th>Name</th>
                 <th>Email Address</th>
+                <th>Mobile Phone</th>
                 <th>Address</th>
                 <th colspan="3">Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($shippers as $shippers)
+            @foreach($employees as $employees)
                 <tr>
-                    <td>{{ $shippers->company }}</td>
-                    <td>{{ $shippers->name }}</td>
-                    <td>{{ $shippers->email_address }}</td>
-                    <td>{{ $shippers->address }}</td>
+                    <td>{{ $employees->company }}</td>
+                    <td>{{ $employees->name }}</td>
+                    <td>{{ $employees->email_address }}</td>
+                    <td>{{ $employees->mobile_phone }}</td>
+                    <td>{{ $employees->address }}</td>
                     <td  style="width: 120px">
-                        {!! Form::open(['route' => ['shippers.destroy', $shippers->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['employees.destroy', $employees->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('shippers.show', [$shippers->id]) }}"
+                            <a href="{{ route('employees.show', [$employees->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('shippers.edit', [$shippers->id]) }}"
+                            <a href="{{ route('employees.edit', [$employees->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
@@ -37,6 +39,5 @@
             </tbody>
         </table>
     </div>
- 
 
 </div>

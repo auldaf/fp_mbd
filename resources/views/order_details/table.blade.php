@@ -47,10 +47,4 @@
             </tbody>
         </table>
     </div>
-
-    <div class="card-footer clearfix">
-        <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $orderDetails])
-        </div>
-    </div>
 </div>
