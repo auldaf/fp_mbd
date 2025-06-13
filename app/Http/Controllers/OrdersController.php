@@ -6,6 +6,7 @@ use App\Http\Requests\CreateOrdersRequest;
 use App\Http\Requests\UpdateOrdersRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\OrdersRepository;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 use Flash;
 
@@ -25,9 +26,13 @@ class OrdersController extends AppBaseController
     public function index(Request $request)
     {
         $orders = $this->ordersRepository->paginate(10);
+        
 
-        return view('orders.index')
-            ->with('orders', $orders);
+        // return view('orders.index')
+        //     ->with('orders', $orders);
+        $ordersEmp = Orders::with('employee')->get();
+        return view('orders.index', compact('ordersEmp', 'orders'));
+
     }
 
     /**

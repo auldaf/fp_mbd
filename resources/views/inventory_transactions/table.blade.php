@@ -26,13 +26,13 @@
                     <td>{{ $inventoryTransaction->customer_order_id }}</td>
                     <td>{{ $inventoryTransaction->comments }}</td>
                     <td  style="width: 120px">
-                        {!! Form::open(['route' => ['inventory-transactionsdestroy', $inventoryTransaction->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['inventory-transactions.destroy', $inventoryTransaction->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('inventory-transactionsshow', [$inventoryTransaction->id]) }}"
+                            <a href="{{ route('inventory-transactions.show', [$inventoryTransaction->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('inventory-transactionsedit', [$inventoryTransaction->id]) }}"
+                            <a href="{{ route('inventory-transactions.edit', [$inventoryTransaction->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>

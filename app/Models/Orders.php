@@ -59,7 +59,8 @@ class Orders extends Model
 
     public function employee(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\Employee::class, 'employee_id');
+        // return $this->belongsTo(\App\Models\Employee::class, 'employee_id');
+        return $this->belongsTo(employees::class);
     }
 
     public function inventoryTransactions(): \Illuminate\Database\Eloquent\Relations\HasMany

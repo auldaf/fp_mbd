@@ -33,3 +33,4 @@ Route::resource('shippers', App\Http\Controllers\ShippersController::class);
 Route::resource('suppliers', App\Http\Controllers\SuppliersController::class);
 Route::resource('users', App\Http\Controllers\UsersController::class);
 Route::resource('employees', App\Http\Controllers\employeesController::class);
+Route::resource('customers', App\Http\Controllers\customersController::class);

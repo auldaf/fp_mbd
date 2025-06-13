@@ -89,3 +89,10 @@
         <p>Employees</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('customers.index') }}" class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Customers</p>
+    </a>
+</li>

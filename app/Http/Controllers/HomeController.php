@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        // return view('home');
+        $topSelling = DB::select('SELECT * FROM vw_top_selling_product');
+        $downSelling = DB::select('SELECT * FROM vw_lowest_selling_product');
+
+        return view('home', compact('topSelling','downSelling'));
     }
 }

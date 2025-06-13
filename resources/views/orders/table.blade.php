@@ -3,7 +3,7 @@
         <table class="table" id="orders-table">
             <thead>
             <tr>
-                <th>Employee Id</th>
+                <th>Employee Name</th>
                 <th>Customer Id</th>
                 <th>Order Date</th>
                 <th>Shipped Date</th>
@@ -20,7 +20,7 @@
             <tbody>
             @foreach($orders as $orders)
                 <tr>
-                    <td>{{ $orders->employee_id }}</td>
+                    <td>{{ $orders->employee->name ?? '-' }}</td>
                     <td>{{ $orders->customer_id }}</td>
                     <td>{{ $orders->order_date }}</td>
                     <td>{{ $orders->shipped_date }}</td>
