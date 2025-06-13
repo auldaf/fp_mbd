@@ -127,3 +127,17 @@
         <p>Customers</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('customer.orders.index') }}" class="nav-link {{ Request::is('customer-orders*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-search"></i>
+        <p>Customer Orders Lookup</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="{{ route('products.by.category.index') }}" class="nav-link {{ Request::is('products-by-category*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-tags"></i>
+        <p>Products by Category</p>
+    </a>
+</li>

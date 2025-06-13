@@ -36,6 +36,11 @@ Route::resource('suppliers', App\Http\Controllers\SuppliersController::class);
 Route::resource('users', App\Http\Controllers\UsersController::class);
 Route::resource('employees', App\Http\Controllers\employeesController::class);
 Route::resource('customers', App\Http\Controllers\customersController::class);
+Route::get('customer-orders', [App\Http\Controllers\CustomerOrdersController::class, 'index'])->name('customer.orders.index');
+Route::post('customer-orders', [App\Http\Controllers\CustomerOrdersController::class, 'show'])->name('customer.orders.show');
+
+Route::get('products-by-category', [App\Http\Controllers\ProductsByCategoryController::class, 'index'])->name('products.by.category.index');
+Route::post('products-by-category', [App\Http\Controllers\ProductsByCategoryController::class, 'show'])->name('products.by.category.show');
 Route::get('/customerordersummary', [App\Http\Controllers\CustomerOrderSummaryController::class, 'index'])->name('customerordersummary');
 Route::get('/productsalessummary', [App\Http\Controllers\ProductSalesSummaryController::class, 'index'])->name('productsalessummary');
 Route::get('/complete_summary', [App\Http\Controllers\CompleteSummaryController::class, 'index'])->name('complete_summary');
