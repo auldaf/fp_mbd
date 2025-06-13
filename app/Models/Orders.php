@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Shippers;
+use App\Models\customers;
+use App\Models\InventoryTransaction;
+use App\Models\Invoices;
+use App\Models\OrderDetails;
 
 class Orders extends Model
 {
     public $table = 'orders';
+    public $timestamps = false;
 
     public $fillable = [
         'employee_id',
@@ -49,12 +55,12 @@ class Orders extends Model
 
     public function shipper(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\Shipper::class, 'shipper_id');
+        return $this->belongsTo(Shippers::class, 'shipper_id');
     }
 
     public function customer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\Customer::class, 'customer_id');
+        return $this->belongsTo(customers::class, 'customer_id');
     }
 
     public function employee(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -65,16 +71,16 @@ class Orders extends Model
 
     public function inventoryTransactions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(\App\Models\InventoryTransaction::class, 'customer_order_id');
+        return $this->hasMany(InventoryTransaction::class, 'customer_order_id');
     }
 
     public function invoices(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(\App\Models\Invoice::class, 'order_id');
+        return $this->hasMany(Invoices::class, 'order_id');
     }
 
     public function orderDetails(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(\App\Models\OrderDetail::class, 'order_id');
+        return $this->hasMany(OrderDetails::class, 'order_id');
     }
 }

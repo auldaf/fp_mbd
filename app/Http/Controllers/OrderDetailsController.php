@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\OrderDetailsRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Database\QueryException;
 
 class OrderDetailsController extends AppBaseController
 {
@@ -45,11 +46,19 @@ class OrderDetailsController extends AppBaseController
     {
         $input = $request->all();
 
-        $orderDetails = $this->orderDetailsRepository->create($input);
-
-        Flash::success('Order Details saved successfully.');
-
-        return redirect(route('order-details.index'));
+        try {
+            $orderDetails = $this->orderDetailsRepository->create($input);
+            Flash::success('Order Details saved successfully.');
+            return redirect(route('order-details.index'));
+        } catch (QueryException $e) {
+            // Check for the specific SQLSTATE and message
+            if ($e->getCode() === '45000' && str_contains($e->getMessage(), 'Quantity must be a positive value')) {
+                Flash::error('Error: Quantity must be a positive value.');
+            } else {
+                Flash::error('An unexpected database error occurred: ' . $e->getMessage());
+            }
+            return redirect()->back()->withInput();
+        }
     }
 
     /**

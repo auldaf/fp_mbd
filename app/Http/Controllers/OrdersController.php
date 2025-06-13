@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrdersRequest;
+use Flash;
 use App\Http\Requests\UpdateOrdersRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\OrdersRepository;
 use App\Models\Orders;
 use Illuminate\Http\Request;
-use Flash;
 
 class OrdersController extends AppBaseController
 {
