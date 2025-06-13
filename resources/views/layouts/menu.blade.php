@@ -9,6 +9,21 @@
 </li>
 
 <li class="nav-item">
+    <a href="{{ route('customerordersummary') }}" class="nav-link {{ Request::is('customerordersummary*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-file-alt"></i>
+        <p>Customer Order Summary (Taib, View 1)</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="{{ route('productsalessummary') }}" class="nav-link {{ Request::is('productsalessummary*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-file-alt"></i>
+        <p>Product Sales Summary (Taib, View 2)</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
     <a href="{{ route('home') }}" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Home</p>
