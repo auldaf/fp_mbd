@@ -26,6 +26,12 @@
         <div class="card">
             @include('products.table')
         </div>
+        <div class="card">
+            @include('products.tablePenjualanNull')
+        </div>
+         <div class="card">
+            @include('products.tablePenjualanMonth')
+        </div>
          <div class="card-footer clearfix">
             <div class="float-right">
                 @include('adminlte-templates::common.paginate', ['records' => $products])

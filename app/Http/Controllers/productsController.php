@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateproductsRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\productsRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use Flash;
 
 class productsController extends AppBaseController
@@ -24,9 +26,80 @@ class productsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $products = $this->productsRepository->paginate(10);
-        return view('products.index')
-            ->with('products', $products);
+  
+        // $products = $this->productsRepository->paginate(10);
+        // $reportData = DB::select("
+        //     SELECT p.product_name,
+        //         SUM(od.quantity) AS total_sold
+        //     FROM order_details od
+        //     JOIN products p ON od.product_id = p.id
+        //     GROUP BY p.product_name
+        //     HAVING SUM(od.quantity) > 0
+        // ");
+       $products = DB::table('products as p')
+        ->leftJoin('order_details as od', 'p.id', '=', 'od.product_id')
+        ->leftJoin(DB::raw('
+        (SELECT id as pid, get_last_date_order(id) as last_order_date FROM products) as dates
+    '), 'p.id', '=', 'dates.pid')
+        ->select(
+            'p.id',
+            'p.product_code',
+            'p.product_name',
+            'p.description',
+            'p.list_price',
+            'p.product_category',
+            'p.product_image',
+            'p.image_mime_type',
+            DB::raw('SUM(od.quantity) as total_sold'),
+            'dates.last_order_date'
+
+            // DB::raw('get_last_date_order(p.id) as last_order_date')
+        )
+        ->groupBy(
+            'p.id',
+            'p.product_code',
+            'p.product_name',
+            'p.description',
+            'p.list_price',
+            'p.product_category',
+            'p.product_image',
+            'p.image_mime_type',
+            'dates.last_order_date'
+
+        )
+        ->paginate(10);
+
+         $reportData = DB::select("
+            SELECT p.id, p.product_name
+            FROM products p
+            LEFT JOIN order_details od ON p.id = od.product_id
+            WHERE od.product_id IS NULL;
+
+        ");
+
+        $bulanList = collect(range(5, 0))->map(function ($i) {
+            return now()->subMonths($i)->format('Y-m');
+        })->toArray();
+
+        $selects = [
+            'p.id',
+            'p.product_name',
+        ];
+
+        foreach ($bulanList as $bulan) {
+            $alias = 'sales_' . str_replace('-', '_', $bulan); // contoh: sales_2025_01
+            $selects[] = DB::raw("get_monthly_sales(p.id, '$bulan') as $alias");
+        }
+
+        $month = DB::table('products as p')
+            ->select($selects)
+            ->get();
+
+
+
+
+           
+            return view('products.index', compact('products', 'reportData','month','bulanList'));
     }
 
     /**
@@ -150,5 +223,18 @@ class productsController extends AppBaseController
         Flash::success('Products deleted successfully.');
 
         return redirect(route('products.index'));
+    }
+
+   public function penjualanNull()
+    {
+        $reportData = DB::select("
+            SELECT p.id, p.product_name
+            FROM products p
+            LEFT JOIN order_details od ON p.id = od.product_id
+            WHERE od.product_id IS NULL;
+
+        ");
+
+        return view('products.index', compact('reportData'));
     }
 }

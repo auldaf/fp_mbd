@@ -1,3 +1,6 @@
+ <divc class="card-header">
+                <h3 class="card-title">Produk Yang Tidak Terjual </h3>
+            </div>
 <div class="card-body p-0">
     <div class="table-responsive">
         <table class="table" id="products-table">
@@ -5,39 +8,14 @@
             <tr>
                 <th>Product Code</th>
                 <th>Product Name</th>
-                <th>Description</th>
-                <th>List Price</th>
-                <th>Product Category</th>
-                <th>Jumlah Penjualan</th>
-                <th>Last Order Date</th>
-                <th>Product Image</th>
-                
                 <th colspan="3">Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $products)
+            @foreach($reportData as $products)
                 <tr>
-                    <td>{{ $products->product_code }}</td>
+                    <td>{{ $products->id }}</td>
                     <td>{{ $products->product_name }}</td>
-                    <td>{{ $products->description }}</td>
-                    <td>{{ $products->list_price }}</td>
-                    <td>{{ $products->product_category }}</td>
-                    <!-- <td>{{ $products->product_category }}</td> -->
-                   
-                    <td>{{ $products->total_sold ?? 0 }}</td>
-                    <td>{{ $product->last_order_date ?? 'Belum pernah terjual' }}</td>
-                    <!-- <td>{{ $product->total_sold ?? 0 }}</td> -->
-                    
-                    <!-- <td>{{ $products->product_image }}</td> -->
-                    <td>
-                        @if ($products->product_image)
-                            <img src="data:{{ $products->image_mime_type }};base64,{{ base64_encode($products->product_image) }}" 
-                                alt="Product Image" width="150">
-                        @else
-                            <p>No image</p>
-                        @endif
-                    </td>
                     
                     <td  style="width: 120px">
                         {!! Form::open(['route' => ['products.destroy', $products->id], 'method' => 'delete']) !!}
