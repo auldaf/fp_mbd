@@ -1,9 +1,3 @@
-<!-- Supplier Ids Field -->
-<div class="col-sm-12">
-    {!! Form::label('supplier_ids', 'Supplier Ids:') !!}
-    <p>{{ $products->supplier_ids }}</p>
-</div>
-
 <!-- Product Code Field -->
 <div class="col-sm-12">
     {!! Form::label('product_code', 'Product Code:') !!}
