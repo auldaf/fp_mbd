@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Auth::routes();
 
 Route::resource('posts', App\Http\Controllers\PostController::class);
 Route::resource('products', App\Http\Controllers\productsController::class);
+Route::get('orderreport', [App\Http\Controllers\OrderReportController::class, 'orderReport'])->name('orderreport');
 Route::resource('orders', App\Http\Controllers\OrdersController::class);
 Route::resource('invoices', App\Http\Controllers\InvoicesController::class);
 Route::resource('inventory-transactions', App\Http\Controllers\InventoryTransactionController::class);

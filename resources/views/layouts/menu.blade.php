@@ -1,4 +1,13 @@
 <!-- need to remove -->
+
+
+<li class="nav-item">
+    <a href="{{ route('orderreport') }}" class="nav-link {{ Request::is('orderreport*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-chart-bar"></i>
+        <p>Order Report (Taib, Join 1)</p>
+    </a>
+</li>
+
 <li class="nav-item">
     <a href="{{ route('home') }}" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
