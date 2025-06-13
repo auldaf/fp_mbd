@@ -38,3 +38,4 @@ Route::resource('employees', App\Http\Controllers\employeesController::class);
 Route::resource('customers', App\Http\Controllers\customersController::class);
 Route::get('/customerordersummary', [App\Http\Controllers\CustomerOrderSummaryController::class, 'index'])->name('customerordersummary');
 Route::get('/productsalessummary', [App\Http\Controllers\ProductSalesSummaryController::class, 'index'])->name('productsalessummary');
+Route::get('/complete_summary', [App\Http\Controllers\CompleteSummaryController::class, 'index'])->name('complete_summary');
