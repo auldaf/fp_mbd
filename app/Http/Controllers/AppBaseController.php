@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 use InfyOm\Generator\Utils\ResponseUtil;
 
 /**
@@ -15,6 +17,13 @@ use InfyOm\Generator\Utils\ResponseUtil;
  */
 class AppBaseController extends Controller
 {
+
+    protected $db;
+
+    public function __construct()
+    {
+        $this->db = DB::connection('dynamic_mysql');
+    }
     public function sendResponse($result, $message)
     {
         return response()->json(ResponseUtil::makeResponse($message, $result));
