@@ -4,36 +4,39 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class customers extends Model
+class Customer extends Model
 {
-    public $table = 'customers';
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'customers';
 
-    public $fillable = [
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
         'name',
         'email_address',
         'mobile_phone',
         'address',
-        'membership'
+        'membership',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
+        'id' => 'integer',
         'name' => 'string',
         'email_address' => 'string',
         'mobile_phone' => 'string',
         'address' => 'string',
-        'membership' => 'boolean'
+        'membership' => 'boolean',
     ];
-
-    public static array $rules = [
-        'name' => 'nullable|string|max:100',
-        'email_address' => 'nullable|string|max:50',
-        'mobile_phone' => 'nullable|string|max:25',
-        'address' => 'nullable|string',
-        'membership' => 'nullable|boolean'
-    ];
-
-    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(\App\Models\Order::class, 'customer_id');
-    }
 }

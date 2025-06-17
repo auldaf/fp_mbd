@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreatecustomersRequest;
-use App\Http\Requests\UpdatecustomersRequest;
+use App\Http\Requests\CreateCustomerRequest;
+use App\Http\Requests\UpdateCustomerRequest;
 use App\Http\Controllers\AppBaseController;
-use App\Repositories\customersRepository;
+use App\Repositories\CustomerRepository;
 use Illuminate\Http\Request;
 use Flash;
 
-class customersController extends AppBaseController
+class CustomersController extends AppBaseController
 {
-    /** @var customersRepository $customersRepository*/
+    /** @var CustomerRepository $customersRepository*/
     private $customersRepository;
 
-    public function __construct(customersRepository $customersRepo)
+    public function __construct(CustomerRepository $customersRepo)
     {
         $this->customersRepository = $customersRepo;
     }
@@ -41,7 +41,7 @@ class customersController extends AppBaseController
     /**
      * Store a newly created customers in storage.
      */
-    public function store(CreatecustomersRequest $request)
+    public function store(CreateCustomerRequest $request)
     {
         $input = $request->all();
 
@@ -87,7 +87,7 @@ class customersController extends AppBaseController
     /**
      * Update the specified customers in storage.
      */
-    public function update($id, UpdatecustomersRequest $request)
+    public function update($id, UpdateCustomerRequest $request)
     {
         $customers = $this->customersRepository->find($id);
 

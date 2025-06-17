@@ -12,21 +12,21 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($customers as $customers)
+            @foreach($customers as $customer)
                 <tr>
-                    <td>{{ $customers->name }}</td>
-                    <td>{{ $customers->email_address }}</td>
-                    <td>{{ $customers->mobile_phone }}</td>
-                    <td>{{ $customers->address }}</td>
-                    <td>{{ $customers->membership }}</td>
+                    <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->email_address }}</td>
+                    <td>{{ $customer->mobile_phone }}</td>
+                    <td>{{ $customer->address }}</td>
+                    <td>{{ $customer->membership }}</td>
                     <td  style="width: 120px">
-                        {!! Form::open(['route' => ['customers.destroy', $customers->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['customers.destroy', $customer->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('customers.show', [$customers->id]) }}"
+                            <a href="{{ route('customers.show', [$customer->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('customers.edit', [$customers->id]) }}"
+                            <a href="{{ route('customers.edit', [$customer->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
@@ -42,7 +42,7 @@
 
     <div class="card-footer clearfix">
         <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $customers])
+            {{ $customers->links() }}
         </div>
     </div>
 </div>

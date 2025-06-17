@@ -34,7 +34,7 @@ Route::resource('purchase-order-details', App\Http\Controllers\PurchaseOrderDeta
 Route::resource('shippers', App\Http\Controllers\ShippersController::class);
 Route::resource('suppliers', App\Http\Controllers\SuppliersController::class);
 Route::resource('users', App\Http\Controllers\UsersController::class);
-Route::resource('employees', App\Http\Controllers\employeesController::class);
+Route::resource('employees', App\Http\Controllers\EmployeesController::class);
 Route::resource('customers', App\Http\Controllers\customersController::class);
 Route::get('customer-orders', [App\Http\Controllers\CustomerOrdersController::class, 'index'])->name('customer.orders.index');
 Route::post('customer-orders', [App\Http\Controllers\CustomerOrdersController::class, 'show'])->name('customer.orders.show');

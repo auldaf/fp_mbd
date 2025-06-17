@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Shippers;
-use App\Models\customers;
+use App\Models\Customer;
 use App\Models\InventoryTransaction;
 use App\Models\Invoices;
 use App\Models\OrderDetails;
 
-class Orders extends Model
+class Order extends Model
 {
     public $table = 'orders';
     public $timestamps = false;
@@ -60,13 +60,13 @@ class Orders extends Model
 
     public function customer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(customers::class, 'customer_id');
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     public function employee(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         // return $this->belongsTo(\App\Models\Employee::class, 'employee_id');
-        return $this->belongsTo(employees::class);
+        return $this->belongsTo(Employee::class);
     }
 
     public function inventoryTransactions(): \Illuminate\Database\Eloquent\Relations\HasMany

@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateemployeesRequest;
 use App\Http\Requests\UpdateemployeesRequest;
 use App\Http\Controllers\AppBaseController;
-use App\Repositories\employeesRepository;
+use App\Repositories\EmployeeRepository;
 use Illuminate\Http\Request;
 use Flash;
 
-class employeesController extends AppBaseController
+class EmployeesController extends AppBaseController
 {
-    /** @var employeesRepository $employeesRepository*/
+    /** @var EmployeeRepository $employeesRepository*/
     private $employeesRepository;
 
-    public function __construct(employeesRepository $employeesRepo)
+    public function __construct(EmployeeRepository $employeesRepo)
     {
         $this->employeesRepository = $employeesRepo;
     }
