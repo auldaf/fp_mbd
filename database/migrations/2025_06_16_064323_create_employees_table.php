@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name', 100)->nullable();
-            $table->string('company', 50)->nullable();
-            $table->string('email_address', 50)->nullable();
-            $table->string('mobile_phone', 25)->nullable();
-            $table->string('address')->nullable();
-        });
+        if (!Schema::hasTable('employees')) {
+            Schema::create('employees', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->timestamps();
+                $table->string('name', 100)->nullable();
+                $table->string('company', 50)->nullable();
+                $table->string('email_address', 50)->nullable();
+                $table->string('mobile_phone', 25)->nullable();
+                $table->string('address', 255)->nullable();
+            });
+        }
     }
 
     /**

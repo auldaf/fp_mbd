@@ -10,17 +10,19 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('customers', function (Blueprint $table) {
-        $table->id();
-        $table->string('name', 100)->nullable();
-        $table->string('email_address')->nullable()->unique();
-        $table->string('mobile_phone', 25)->nullable();
-        $table->text('address')->nullable();
-        $table->string('password');
-        $table->boolean('membership')->default(false);
-    });
-}
+    {
+        if (!Schema::hasTable('customers')) {
+            Schema::create('customers', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('name', 100)->nullable();
+                $table->string('email_address', 255)->nullable();
+                $table->string('mobile_phone', 25)->nullable();
+                $table->text('address')->nullable();
+                $table->string('password', 255);
+                $table->boolean('membership')->default(0);
+            });
+        }
+    }
     /**
      * Reverse the migrations.
      */

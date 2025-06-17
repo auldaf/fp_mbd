@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('supplier_ids')->nullable();
-            $table->string('product_code', 25)->nullable();
-            $table->string('product_name', 50)->nullable();
-            $table->text('description')->nullable();
-            $table->decimal('list_price', 8, 2);
-            $table->string('product_category', 50)->nullable();
-            $table->string('product_image');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('products')) {
+            Schema::create('products', function (Blueprint $table) {
+                $table->increments('id');
+                $table->text('supplier_ids')->nullable();
+                $table->string('product_code', 25)->nullable();
+                $table->string('product_name', 50)->nullable();
+                $table->text('description')->nullable();
+                $table->decimal('list_price', 8, 2);
+                $table->string('product_category', 50)->nullable();
+                $table->string('product_image', 255);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
