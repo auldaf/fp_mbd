@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Order;
+use App\Models\PurchaseOrder;
 
-class employees extends Model
+class Employee extends Model
 {
     public $table = 'employees';
 
@@ -34,11 +36,11 @@ class employees extends Model
 
     public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(\App\Models\Order::class, 'employee_id');
+        return $this->hasMany(\App\Models\Orders::class, 'employee_id');
     }
 
     public function purchaseOrders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(\App\Models\PurchaseOrder::class, 'created_by');
+        return $this->hasMany(\App\Models\PurchaseOrders::class, 'created_by');
     }
 }

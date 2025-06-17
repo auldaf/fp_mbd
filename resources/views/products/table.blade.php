@@ -10,7 +10,6 @@
                 <th>Product Category</th>
                 <th>Jumlah Penjualan</th>
                 <th>Last Order Date</th>
-                <th>Product Image</th>
                 
                 <th colspan="3">Action</th>
             </tr>
@@ -29,15 +28,6 @@
                     <td>{{ $product->last_order_date ?? 'Belum pernah terjual' }}</td>
                     <!-- <td>{{ $product->total_sold ?? 0 }}</td> -->
                     
-                    <!-- <td>{{ $products->product_image }}</td> -->
-                    <td>
-                        @if ($products->product_image)
-                            <img src="data:{{ $products->image_mime_type }};base64,{{ base64_encode($products->product_image) }}" 
-                                alt="Product Image" width="150">
-                        @else
-                            <p>No image</p>
-                        @endif
-                    </td>
                     
                     <td  style="width: 120px">
                         {!! Form::open(['route' => ['products.destroy', $products->id], 'method' => 'delete']) !!}

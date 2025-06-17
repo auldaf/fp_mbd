@@ -8,8 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\productsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use Flash;
+use Laracasts\Flash\Facade as Flash;
 
 class productsController extends AppBaseController
 {
@@ -39,7 +38,7 @@ class productsController extends AppBaseController
        $products = DB::table('products as p')
         ->leftJoin('order_details as od', 'p.id', '=', 'od.product_id')
         ->leftJoin(DB::raw('
-        (SELECT id as pid, get_last_date_order(id) as last_order_date FROM products) as dates
+        (SELECT id as pid, get_last_order_date(id) as last_order_date FROM products) as dates
     '), 'p.id', '=', 'dates.pid')
         ->select(
             'p.id',
@@ -48,8 +47,6 @@ class productsController extends AppBaseController
             'p.description',
             'p.list_price',
             'p.product_category',
-            'p.product_image',
-            'p.image_mime_type',
             DB::raw('SUM(od.quantity) as total_sold'),
             'dates.last_order_date'
 
@@ -62,8 +59,6 @@ class productsController extends AppBaseController
             'p.description',
             'p.list_price',
             'p.product_category',
-            'p.product_image',
-            'p.image_mime_type',
             'dates.last_order_date'
 
         )
@@ -117,24 +112,9 @@ class productsController extends AppBaseController
     {
         $input = $request->all();
 
-            if ($request->hasFile('product_image')) {
-                $image = $request->file('product_image');
-
-                // Validasi gambar (pastikan juga ada di CreateproductsRequest)
-                $request->validate([
-                    'product_image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
-                ]);
-
-                // Simpan isi file (binary) ke DB
-                $input['product_image'] = file_get_contents($image->getRealPath());
-
-                // Simpan tipe mime-nya untuk kebutuhan <img>
-                $input['image_mime_type'] = $image->getMimeType();
-            }
-
         $products = $this->productsRepository->create($input);
 
-        Flash::success('Products saved successfully.');
+        \Laracasts\Flash\Facade::success('Products saved successfully.');
 
         return redirect(route('products.index'));
     }
@@ -186,27 +166,16 @@ class productsController extends AppBaseController
 
          $validatedData = $request->validated();
 
-            if ($request->hasFile('product_image')) {
-                $image = $request->file('product_image');
-
-                $validatedData['product_image'] = file_get_contents($image->getRealPath());
-                $validatedData['image_mime_type'] = $image->getMimeType();
-            }
-
-
-
         $products = $this->productsRepository->update($validatedData, $id);
 
 
-        Flash::success('Products updated successfully.');
+        \Laracasts\Flash\Facade::success('Products updated successfully.');
 
         return redirect(route('products.index'));
     }
 
     /**
      * Remove the specified products from storage.
-     *
-     * @throws \Exception
      */
     public function destroy($id)
     {
@@ -220,7 +189,7 @@ class productsController extends AppBaseController
 
         $this->productsRepository->delete($id);
 
-        Flash::success('Products deleted successfully.');
+        \Laracasts\Flash\Facade::success('Products deleted successfully.');
 
         return redirect(route('products.index'));
     }

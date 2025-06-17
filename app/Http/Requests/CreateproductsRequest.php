@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\products;
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateproductsRequest extends FormRequest
@@ -24,6 +24,6 @@ class CreateproductsRequest extends FormRequest
      */
     public function rules()
     {
-        return products::$rules;
+        return Product::$rules;
     }
 }

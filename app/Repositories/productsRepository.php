@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\products;
+use App\Models\Product;
 use App\Repositories\BaseRepository;
 
 class productsRepository extends BaseRepository
@@ -13,8 +13,7 @@ class productsRepository extends BaseRepository
         'product_name',
         'description',
         'list_price',
-        'product_category',
-        'product_image'
+        'product_category'
     ];
 
     public function getFieldsSearchable(): array
@@ -24,6 +23,6 @@ class productsRepository extends BaseRepository
 
     public function model(): string
     {
-        return products::class;
+        return Product::class;
     }
 }
